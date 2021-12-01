@@ -1,0 +1,65 @@
+level13@SnowCrash:~$ su level14
+Password: 2A31L79asukciNyi8uppkEuSx
+level14@SnowCrash:~$ ls -l
+total 0
+level14@SnowCrash:~$ pwd
+/home/user/level14
+level14@SnowCrash:~$ find / -user level14 2>/dev/null | grep -v /proc/
+level14@SnowCrash:~$ find / -user flag14 2>/dev/null
+level14@SnowCrash:~$ find / -group flag14 2>/dev/null
+level14@SnowCrash:~$ find / -group level14 2>/dev/null | grep -v /proc/
+
+Just nothing, so we will study the getflag function with gdb.
+
+With gdb we disassemble the main and we see that it use ptrace and getuid. We will try to trick getflag with the uid of flag14. But we need to disable ptrace who stop us from stepping to getuid.
+
+level14@SnowCrash:~$ id
+uid=2014(level14) gid=2014(level14) groups=2014(level14),100(users)
+level14@SnowCrash:~$ id flag14
+uid=3014(flag14) gid=3014(flag14) groups=3014(flag14),1001(flag)
+
+level14@SnowCrash:~$ gdb /bin/getflag
+
+(gdb) catch syscall ptrace
+\Catchpoint 1 (syscall 'ptrace' [26])
+(gdb) commands 1
+Type commands for breakpoint(s) 1, one per line.
+End with a line saying just "end".
+>set ($eax) = 0
+>continue
+>end
+
+This is to disable ptrace.
+
+(gdb) b getuid
+Breakpoint 2 at 0x80484b0
+(gdb) run
+Starting program: /bin/getflag
+
+Catchpoint 1 (call to syscall ptrace), 0xb7fdd428 in __kernel_vsyscall ()
+
+Catchpoint 1 (returned from syscall ptrace), 0xb7fdd428 in __kernel_vsyscall ()
+
+Breakpoint 2, 0xb7ee4cc0 in getuid () from /lib/i386-linux-gnu/libc.so.6
+(gdb) print $eax
+$1 = 32
+(gdb) step
+Single stepping until exit from function getuid,
+which has no line number information.
+0x08048b02 in main ()
+(gdb) print $eax
+$2 = 2014
+(gdb) set $eax = 3014
+(gdb) print $eax
+$3 = 3014
+(gdb) step
+Single stepping until exit from function main,
+which has no line number information.
+Check flag.Here is your token : 7QiHafiNa3HVozsaXkawuYrTstxbpABHD8CPnHJ
+0xb7e454d3 in __libc_start_main () from /lib/i386-linux-gnu/libc.so.6
+
+level14@SnowCrash:~$ su flag14
+Password: 7QiHafiNa3HVozsaXkawuYrTstxbpABHD8CPnHJ
+Congratulation. Type getflag to get the key and send it to me the owner of this livecd :)
+flag14@SnowCrash:~$ getflag
+Check flag.Here is your token : 7QiHafiNa3HVozsaXkawuYrTstxbpABHD8CPnHJ

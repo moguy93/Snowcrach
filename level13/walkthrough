@@ -1,0 +1,50 @@
+level12@SnowCrash:~$ su level13
+Password: g1qKMiRpXf53AWhDaU7FEkczr
+
+level13@SnowCrash:~$ ls -l
+-rwsr-sr-x 1 flag13 level13 7303 Aug 30  2015 level13
+
+level13@SnowCrash:~$ ./level13
+UID 2013 started us but we we expect 4242
+
+level13@SnowCrash:~$ id
+uid=2013(level13) gid=2013(level13) groups=2013(level13),100(users)
+
+So it check my uid and compare it to 4242.
+We will use gdb to change the value of my uid before it is compared to 4242. The uid indicating the user it isn’t possible to change it otherwise.
+
+level13@SnowCrash:~$ gdb level13
+…
+(gdb) disas main
+Dump of assembler code for function main:
+…
+   0x08048595 <+9>:	call   0x8048380 <getuid@plt>
+   0x0804859a <+14>:	cmp    $0x1092,%eax
+…
+
+My uid is stocked in the variable eax.
+
+(gdb) b getuid
+Breakpoint 1 at 0x8048380
+(gdb) run
+Starting program: /home/user/level13/level13
+
+Breakpoint 1, 0xb7ee4cc0 in getuid () from /lib/i386-linux-gnu/libc.so.6
+(gdb) print $eax
+$1 = 1
+(gdb) step
+Single stepping until exit from function getuid,
+which has no line number information.
+0x0804859a in main ()
+(gdb) print $eax
+$2 = 2013
+(gdb) set $eax=4242
+(gdb) print $eax
+$3 = 4242
+(gdb) step
+Single stepping until exit from function printf,
+which has no line number information.
+your token is 2A31L79asukciNyi8uppkEuSx
+0x080485e8 in main ()
+
+I pose some breakpoint. And then change the value of the variable eax before it was compared to 4242.

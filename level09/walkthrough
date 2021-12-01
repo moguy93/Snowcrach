@@ -1,0 +1,39 @@
+flag08@SnowCrash:~$ su level09
+Password: 25749xKZ8L7DkSCwJkT9dyv6f
+
+level09@SnowCrash:~$ ls -l
+-rwsr-sr-x 1 flag09 level09 7640 Mar  5  2016 level09
+----r--r-- 1 flag09 level09   26 Mar  5  2016 token
+
+level09@SnowCrash:~$ ./level09
+You need to provied only one arg.
+level09@SnowCrash:~$ ./level09  token
+tpmhr
+level09@SnowCrash:~$ cat token
+f4kmm6p|=�p�n��DB�Du{��
+
+ The token seems to have been hashed by the executable level09.
+Seems that a rot +n is applied n being the index of the string given.
+
+We get the token with scp.
+
+scp -P 4242 level09@[ip]:/home/user/level09/token 
+
+We write a program who will do a rot -n to decode the password.
+
+#!/bin/Python3
+
+import sys
+
+content = enumerate(sys.argv[1].encode(encoding="utf-8", errors="surrogateescape"))
+for i, character in content:
+    print(chr(character - i), end="")
+
+rot.py $(cat token)
+f3iji1ju5yuevaus41q1afiuq
+
+level10@SnowCrash:~$ su flag09
+Password: f3iji1ju5yuevaus41q1afiuq
+Don't forget to launch getflag !
+flag09@SnowCrash:~$ getflag
+Check flag.Here is your token : s5cAJpM8ev6XHw998pRWG728z

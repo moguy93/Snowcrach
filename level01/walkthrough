@@ -1,0 +1,58 @@
+flag00@SnowCrash:~$ su level01
+Password: x24ti5gi3x0ol2eh4esiuxias
+
+level01@SnowCrash:~$ ls -l
+total 0
+
+level01@SnowCrash:~$ pwd
+/home/user/level01
+
+level01@SnowCrash:~$ id
+uid=2001(level01) gid=2001(level01) groups=2001(level01),100(users)
+
+level01@SnowCrash:~$ find / -user level01 2>/dev/null | grep -v /proc/
+level01@SnowCrash:~$ find / -user flag01 2>/dev/null
+Nothing.
+
+level01@SnowCrash:~$ find / -name passwd 2>/dev/null
+/etc/cron.daily/passwd
+/etc/init.d/passwd
+/etc/pam.d/passwd
+/etc/passwd
+/usr/bin/passwd
+/usr/share/doc/passwd
+/usr/share/lintian/overrides/passwd
+/rofs/etc/cron.daily/passwd
+/rofs/etc/init.d/passwd
+/rofs/etc/pam.d/passwd
+/rofs/etc/passwd
+/rofs/usr/bin/passwd
+/rofs/usr/share/doc/passwd
+/rofs/usr/share/lintian/overrides/passwd
+
+level01@SnowCrash:~$ cat /etc/passwd | grep flag01
+flag01:42hDRfypTqqnw:3001:3001::/home/flag/flag01:/bin/bash
+
+We find 42hDRfypTqqnw
+
+level01@SnowCrash:~$ su flag01
+Password: 42hDRfypTqqnw
+su: Authentication failure
+
+We need to do something else. The password seems hashed, so we will use John the ripper.
+We will download the file containing the password and then use John on it.
+
+scp -P 4242 level01@ip:/etc/passwd level01passwd.txt 
+
+john --show level01passwd.txt 
+flag01:abcdefg:3001:3001::/home/flag/flag01:/bin/bash
+
+1 password hash cracked, 0 left
+
+We find abcdefg.
+
+level01@SnowCrash:~$ su flag01
+Password: abcdefg
+Don't forget to launch getflag !
+flag01@SnowCrash:~$ getflag
+Check flag.Here is your token : f2av5il02puano7naaf6adaaf
