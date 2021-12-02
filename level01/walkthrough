@@ -40,7 +40,7 @@ level01@SnowCrash:~$ su flag01
 Password: 42hDRfypTqqnw
 su: Authentication failure
 
-We need to do something else. The password seems hashed, so we will use John the ripper.
+We need to do something more. The password seems hashed, so we will use John the ripper.
 We will download the file containing the password and then use John on it.
 
 scp -P 4242 level01@ip:/etc/passwd level01passwd.txt 

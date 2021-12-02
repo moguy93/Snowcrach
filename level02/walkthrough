@@ -4,7 +4,7 @@ Password: f2av5il02puano7naaf6adaaf
 level02@SnowCrash:~$ ls -l
 ----r--r-- 1 flag02 level02 8302 Aug 30  2015 level02.pcap
 
-We install Wireshark to read the .pap file and we transfer the file via scp.
+We install Wireshark to read the .pcap file and we transfer the file via scp.
 
 scp -P 4242 level02@192.168.0.22://home/user/level02/level02.pcap .
 
