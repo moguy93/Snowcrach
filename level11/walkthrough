@@ -40,7 +40,7 @@ while 1 do
   client:close()
 end
 
-All the function is obviously a nonsense. But the hash function use io.popen who concatenate and execute a shell command. So we can exploit this by injecting another command after the echo.
+All the function is obviously useless, but the hash function use io.popen who concatenate and execute a shell command. So we can exploit this by injecting another command after the echo.
 But we have to first connect to the server 127.0.0.1 on the port 5151 with netcat.
 
 level11@SnowCrash:~$ nc 127.0.0.1 5151

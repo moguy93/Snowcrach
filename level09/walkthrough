@@ -14,8 +14,7 @@ f4kmm6p|=�p�n��DB�Du{��
 
  The token seems to have been hashed by the executable level09.
 Seems that a rot +n is applied n being the index of the string given.
-
-We get the token with scp.
+We will get the token with scp.
 
 scp -P 4242 level09@[ip]:/home/user/level09/token 
 

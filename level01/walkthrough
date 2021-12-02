@@ -12,7 +12,8 @@ uid=2001(level01) gid=2001(level01) groups=2001(level01),100(users)
 
 level01@SnowCrash:~$ find / -user level01 2>/dev/null | grep -v /proc/
 level01@SnowCrash:~$ find / -user flag01 2>/dev/null
-Nothing.
+
+Nothing here. We search elsewhere.
 
 level01@SnowCrash:~$ find / -name passwd 2>/dev/null
 /etc/cron.daily/passwd

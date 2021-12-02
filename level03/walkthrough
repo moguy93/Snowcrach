@@ -3,6 +3,7 @@ Password: kooda2puivaav1idi4f57q8iq
 
 level03@SnowCrash:~$ ls -l
 -rwsr-sr-x 1 flag03 level03 8627 Mar  5  2016 level03
+
 The ’s’ in the permissions tell us that we have the same permissions as the owner of the file when executing it.
 
 level03@SnowCrash:~$ pwd

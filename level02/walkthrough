@@ -8,7 +8,7 @@ We install Wireshark to read the .pap file and we transfer the file via scp.
 
 scp -P 4242 level02@192.168.0.22://home/user/level02/level02.pcap .
 
-In Wireshark with right click we follow the tcp stream and we see :
+In Wireshark right click and follow the tcp stream, we see :
 
 ..%..%..&..... ..#..'..$..&..... ..#..'..$.. .....#.....'........... .38400,38400....#.SodaCan:0....'..DISPLAY.SodaCan:0......xterm.........."........!........"..".....b........b....	B.
 ..............................1.......!.."......"......!..........."........"..".............	..
@@ -23,7 +23,7 @@ Password: ft_wandr...NDRel.L0L
 Login incorrect
 wwwbugs login: 
 
-ft_wandrNDRelL0L without the .
+ft_wandrNDRelL0L we just omit the '.'
 
 level02@SnowCrash:~$ su flag02
 Password: ft_wandrNDRelL0L

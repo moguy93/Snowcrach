@@ -29,7 +29,7 @@ group::r-x
 mask::r-x
 other::---
 
-So we can see that level05 users have only the permission to read.
+So we can see that level05 users only have the permission to read.
 
 level05@SnowCrash:~$ cat /usr/sbin/openarenaserver
 #!/bin/sh
