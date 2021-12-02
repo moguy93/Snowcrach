@@ -10,7 +10,7 @@ level10@SnowCrash:~$ strings level10
 Connecting to %s:6969 ..
 …
 
-With gdb we disassemble main and we see that the program utilise access and open.
+With gdb we disassemble main and we see that the program calls access and open.
 On the man page of access we can read :
        Warning: Using these calls to check if a user is authorised to,
        for example, open a file before actually doing so using open(2)
@@ -22,12 +22,10 @@ So we will do just that to access token.
 
 But we have to first write a little program to create a server on port 6969 to get the content of token.
 
-#! /usr/bin/python3
-
 import socket
 
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-addr = ("192.168.0.11", 6969)
+addr = ("ip", 6969)
 server.bind(addr)
 server.listen(5)
 print("addr = %s, port = %s" % addr)

