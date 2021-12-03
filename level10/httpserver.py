@@ -1,7 +1,7 @@
 import socket
 
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-addr = ("ip", 6969)
+addr = ("host_ip", 6969)
 server.bind(addr)
 server.listen(5)
 print("addr = %s, port = %s" % addr)

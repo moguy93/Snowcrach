@@ -35,12 +35,20 @@ sub n {
 
 n(t(param("x"), param("y")));
 
-The exploit here is open to all to see, the `` around the egrep tell us that we can execute a shell command here. But our entries will be modified.
+********************************************************************************
+The exploit here is open to all to see, the `` around the egrep tell us
+that we can execute a shell command here. But our entries will be modified.
+********************************************************************************
 
   $xx =~ tr/a-z/A-Z/; Make all letters upercase.
   $xx =~ s/\s.*//; Suppress all space.
 
-So we will create a file whose name is in uppercase, and whose containing a call to getflag, and we will use substitution (*) to make the shell find it among the directories. It needs to be the only file with this name for the substitution to work.
+********************************************************************************
+So we will create a file whose name is in uppercase, and whose containing a
+call to getflag, and we will use substitution (*) to make the shell find it
+among the directories. It needs to be the only file with this name for the
+substitution to work.
+********************************************************************************
 
 level12@SnowCrash:~$ echo 'getflag > /tmp/level12' > /tmp/LEVEL12
 level12@SnowCrash:~$ cat /tmp/LEVEL12

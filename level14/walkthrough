@@ -9,9 +9,13 @@ level14@SnowCrash:~$ find / -user flag14 2>/dev/null
 level14@SnowCrash:~$ find / -group flag14 2>/dev/null
 level14@SnowCrash:~$ find / -group level14 2>/dev/null | grep -v /proc/
 
+********************************************************************************
 Just nothing, so we will study the getflag function with gdb.
-
-With gdb we disassemble the main and we see that it use ptrace and getuid. We will try to trick getflag with the uid of flag14. But we need to disable ptrace who stop us from stepping to getuid.
+With gdb we disassemble the main and we see that it use ptrace and getuid.
+We will try to trick getflag with the uid of flag14. But we need to disable
+ptrace who stop us from stepping to getuid.
+Just nothing, so we will study the getflag function with gdb.
+********************************************************************************
 
 level14@SnowCrash:~$ id
 uid=2014(level14) gid=2014(level14) groups=2014(level14),100(users)
@@ -29,7 +33,9 @@ End with a line saying just "end".
 >continue
 >end
 
+********************************************************************************
 This is to disable ptrace.
+********************************************************************************
 
 (gdb) b getuid
 Breakpoint 2 at 0x80484b0
