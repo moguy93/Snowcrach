@@ -14,6 +14,7 @@ $> scp -P 4242 level02@ip://home/user/level02/level02.pcap ./
 In Wireshark, right click on any package of the file, follow -> tcp stream
 Show data as UTF-8, and we can see :
 ********************************************************************************
+
 ��%��%��&���� ��#��'��$��&���� ��#��'��$�� ����#����'�������� 38400,38400����#SodaCan:0����'DISPLAYSodaCan:0����xterm��������"������!������"��"bb	B
 �����������1������!��"����"����!��������"������"��"����	�
 ������������
