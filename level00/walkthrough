@@ -12,6 +12,11 @@ uid=2000(level00) gid=2000(level00) groups=2000(level00),100(users)
 level00@SnowCrash:~$ pwd
 /home/user/level00
 
+********************************************************************************
+Nothing in the current directory. Let's try to find some files that would have
+execution permissions we are looking for.
+********************************************************************************
+
 level00@SnowCrash:~$ find / -user level00 2>/dev/null | grep -v /proc/
 level00@SnowCrash:~$
 
