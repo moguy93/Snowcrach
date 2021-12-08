@@ -9,6 +9,7 @@ We install Wireshark to read the .pcap file and we transfer the file via scp.
 ********************************************************************************
 
 $> scp -P 4242 level02@ip://home/user/level02/level02.pcap ./
+$> chmod 777 level02.pcap
 
 ********************************************************************************
 In Wireshark, right click on any package of the file, follow -> tcp stream

